@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 
@@ -17,8 +18,8 @@ namespace TradingJS.src
 
             try
             {
-                string Query = "SELECT int_id, dt_compra, var_criptomoneda, dbl_inversion, int_cantidad, dbl_precio_compra,	dbl_precio_actual, dbl_total, " +
-                    "dbl_rentabilidad, dt_modificacion,	bol_estatus " +
+                string Query = "SELECT int_id, dt_compra, var_moneda, var_intercambio, dbl_inversion, dbl_cantidad, dbl_precio_compra, dbl_precio_actual, " +
+                    "dbl_comision, dbl_total, dbl_rentabilidad, dt_modificacion, bol_estatus " +
                     "FROM tbl_operacion;";
 
                 Conexion.Open();
@@ -34,20 +35,26 @@ namespace TradingJS.src
                     if (!string.IsNullOrEmpty(dr["dt_compra"].ToString()))
                         Obj.FechaCompra = dr["dt_compra"].ToString();
 
-                    if (!string.IsNullOrEmpty(dr["var_criptomoneda"].ToString()))
-                        Obj.Criptomoneda = dr["var_criptomoneda"].ToString();
+                    if (!string.IsNullOrEmpty(dr["var_moneda"].ToString()))
+                        Obj.Moneda = dr["var_moneda"].ToString();
+
+                    if (!string.IsNullOrEmpty(dr["var_intercambio"].ToString()))
+                        Obj.Intercambio = dr["var_intercambio"].ToString();
 
                     if (!string.IsNullOrEmpty(dr["dbl_inversion"].ToString()))
                         Obj.Inversion = Convert.ToDouble(dr["dbl_inversion"]);
 
-                    if (!string.IsNullOrEmpty(dr["int_cantidad"].ToString()))
-                        Obj.Cantidad = Convert.ToInt32(dr["int_cantidad"]);
+                    if (!string.IsNullOrEmpty(dr["dbl_cantidad"].ToString()))
+                        Obj.Cantidad = Convert.ToDouble(dr["dbl_cantidad"]);
 
                     if (!string.IsNullOrEmpty(dr["dbl_precio_compra"].ToString()))
                         Obj.PrecioCompra = Convert.ToDouble(dr["dbl_precio_compra"]);
 
                     if (!string.IsNullOrEmpty(dr["dbl_precio_actual"].ToString()))
                         Obj.PrecioActual = Convert.ToDouble(dr["dbl_precio_actual"]);
+
+                    if (!string.IsNullOrEmpty(dr["dbl_comision"].ToString()))
+                        Obj.Comision = Convert.ToDouble(dr["dbl_comision"]);
 
                     if (!string.IsNullOrEmpty(dr["dbl_total"].ToString()))
                         Obj.Total = Convert.ToDouble(dr["dbl_total"]);
@@ -79,6 +86,40 @@ namespace TradingJS.src
             }
 
             return ListaOperaciones;
+        }
+
+        public bool GuardarOperacion(DateTime _FechaCompra, string _Moneda, string _Intercambio, double _Inversion, double _Cantidad, double _PrecioCompra, double _Comision)
+        {
+            bool Resultado = false;
+            MySqlConnection Conexion = new MySqlConnection(CadenaConexion);
+
+            try
+            {
+                string Query = "INSERT INTO tbl_operacion(dt_compra, var_moneda, var_intercambio, dbl_inversion, dbl_cantidad, dbl_precio_compra, " +
+                    "dbl_precio_actual, dbl_comision, dbl_total, dbl_rentabilidad, dt_modificacion, bol_estatus) " +
+                    $"VALUES ('{_FechaCompra.ToString("yyyy-MM-dd hh:mm:ss")}','{_Moneda}','{_Intercambio}', {_Inversion}, " +
+                    $"{_Cantidad}, {_PrecioCompra}, 0, {_Comision}, 0, 0, '{DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")}', true)";
+
+                Conexion.Open();
+                MySqlCommand Cmd = new MySqlCommand(Query, Conexion) { CommandTimeout = 180 };
+                int Filas = Cmd.ExecuteNonQuery();
+                if (Filas > 0)
+                    Resultado = true;
+
+                Cmd.Dispose();
+                Conexion.Close();
+            }
+            catch (Exception Ex)
+            {
+                Resultado = false;
+            }
+            finally
+            {
+                if (Conexion.State == ConnectionState.Open)
+                    Conexion.Close();
+            }
+
+            return Resultado;
         }
     }
 }

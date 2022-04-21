@@ -15,6 +15,10 @@ namespace TradingJS
         [OperationContract]
         [WebInvoke(UriTemplate = "/ObtenerOperaciones", Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         List<Operacion> ObtenerOperaciones();
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/GuardarOperacion", Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        bool GuardarOperacion(DateTime FechaCompra, string Moneda, string Intercambio, double Inversion, double Cantidad, double PrecioCompra, double Comision);
     }
 
     [DataContract]
@@ -22,24 +26,40 @@ namespace TradingJS
     {
         [DataMember]
         public int IdOperacion { get; set; }
+
         [DataMember]
         public string FechaCompra { get; set; }
+
         [DataMember]
-        public string Criptomoneda { get; set; }
+        public string Moneda { get; set; }
+
+        [DataMember]
+        public string Intercambio { get; set; }
+
         [DataMember]
         public double Inversion { get; set; }
+
         [DataMember]
-        public int Cantidad { get; set; }
+        public double Cantidad { get; set; }
+
         [DataMember]
         public double PrecioCompra { get; set; }
+
         [DataMember]
         public double PrecioActual { get; set; }
+
+        [DataMember]
+        public double Comision { get; set; }
+
         [DataMember]
         public double Total { get; set; }
+
         [DataMember]
         public double Rentabilidad { get; set; }
+
         [DataMember]
         public string Modificacion { get; set; }
+
         [DataMember]
         public bool Estatus { get; set; }
     }

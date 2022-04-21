@@ -22,12 +22,28 @@ namespace TradingJS
             {
                 ListaOperaciones = Datos.ObtenerOperaciones();
             }
-            catch (Exception Ex)
+            catch (Exception)
             {
                 ListaOperaciones = null;
             }
 
             return ListaOperaciones;
+        }
+
+        public bool GuardarOperacion(DateTime FechaCompra, string Moneda, string Intercambio, double Inversion, double Cantidad, double PrecioCompra, double Comision)
+        {
+            bool Resultado = false;
+            Datos Datos = new Datos();
+
+            try
+            {
+                Resultado = Datos.GuardarOperacion(FechaCompra, Moneda, Intercambio, Inversion, Cantidad, PrecioCompra, Comision);
+            }
+            catch (Exception)
+            {
+                Resultado = false;
+            }
+            return Resultado;
         }
     }
 }
