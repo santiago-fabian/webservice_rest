@@ -33,7 +33,7 @@ namespace TradingJS.src
                     Obj.IdOperacion = Convert.ToInt32(dr["int_id"]);
 
                     if (!string.IsNullOrEmpty(dr["dt_compra"].ToString()))
-                        Obj.FechaCompra = dr["dt_compra"].ToString();
+                        Obj.FechaCompra = Convert.ToDateTime(dr["dt_compra"]).ToString("yyyy-MM-dd hh:mm:ss");
 
                     if (!string.IsNullOrEmpty(dr["var_moneda"].ToString()))
                         Obj.Moneda = dr["var_moneda"].ToString();
@@ -63,7 +63,7 @@ namespace TradingJS.src
                         Obj.Rentabilidad = Convert.ToDouble(dr["dbl_rentabilidad"]);
 
                     if (!string.IsNullOrEmpty(dr["dt_modificacion"].ToString()))
-                        Obj.Modificacion = dr["dt_modificacion"].ToString();
+                        Obj.Modificacion = Convert.ToDateTime(dr["dt_modificacion"]).ToString("yyyy-MM-dd hh:mm:ss");
 
                     if (!string.IsNullOrEmpty(dr["bol_estatus"].ToString()))
                         Obj.Estatus = Convert.ToBoolean(dr["bol_estatus"]);
