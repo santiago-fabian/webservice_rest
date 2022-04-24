@@ -37,25 +37,25 @@ namespace TradingJS
         public string Intercambio { get; set; }
 
         [DataMember]
-        public double Inversion { get; set; }
+        public string Inversion { get; set; }
 
         [DataMember]
-        public double Cantidad { get; set; }
+        public string Cantidad { get; set; }
 
         [DataMember]
-        public double PrecioCompra { get; set; }
+        public string PrecioCompra { get; set; }
 
         [DataMember]
-        public double PrecioActual { get; set; }
+        public string PrecioActual { get; set; }
 
         [DataMember]
-        public double Comision { get; set; }
+        public string Comision { get; set; }
 
         [DataMember]
-        public double Total { get; set; }
+        public string Total { get; set; }
 
         [DataMember]
-        public double Rentabilidad { get; set; }
+        public string Rentabilidad { get; set; }
 
         [DataMember]
         public string Modificacion { get; set; }

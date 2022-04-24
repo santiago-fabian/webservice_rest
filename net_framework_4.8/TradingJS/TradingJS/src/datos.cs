@@ -42,25 +42,25 @@ namespace TradingJS.src
                         Obj.Intercambio = dr["var_intercambio"].ToString();
 
                     if (!string.IsNullOrEmpty(dr["dbl_inversion"].ToString()))
-                        Obj.Inversion = Convert.ToDouble(dr["dbl_inversion"]);
+                        Obj.Inversion = dr["dbl_inversion"].ToString();
 
                     if (!string.IsNullOrEmpty(dr["dbl_cantidad"].ToString()))
-                        Obj.Cantidad = Convert.ToDouble(dr["dbl_cantidad"]);
+                        Obj.Cantidad = dr["dbl_cantidad"].ToString();
 
                     if (!string.IsNullOrEmpty(dr["dbl_precio_compra"].ToString()))
-                        Obj.PrecioCompra = Convert.ToDouble(dr["dbl_precio_compra"]);
+                        Obj.PrecioCompra = dr["dbl_precio_compra"].ToString();
 
                     if (!string.IsNullOrEmpty(dr["dbl_precio_actual"].ToString()))
-                        Obj.PrecioActual = Convert.ToDouble(dr["dbl_precio_actual"]);
+                        Obj.PrecioActual = dr["dbl_precio_actual"].ToString();
 
                     if (!string.IsNullOrEmpty(dr["dbl_comision"].ToString()))
-                        Obj.Comision = Convert.ToDouble(dr["dbl_comision"]);
+                        Obj.Comision = dr["dbl_comision"].ToString();
 
                     if (!string.IsNullOrEmpty(dr["dbl_total"].ToString()))
-                        Obj.Total = Convert.ToDouble(dr["dbl_total"]);
+                        Obj.Total = dr["dbl_total"].ToString();
 
                     if (!string.IsNullOrEmpty(dr["dbl_rentabilidad"].ToString()))
-                        Obj.Rentabilidad = Convert.ToDouble(dr["dbl_rentabilidad"]);
+                        Obj.Rentabilidad = dr["dbl_rentabilidad"].ToString();
 
                     if (!string.IsNullOrEmpty(dr["dt_modificacion"].ToString()))
                         Obj.Modificacion = Convert.ToDateTime(dr["dt_modificacion"]).ToString("yyyy-MM-dd hh:mm:ss");
